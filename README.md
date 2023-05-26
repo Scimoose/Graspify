@@ -5,7 +5,7 @@ To get started, create a .env file and insert your OpenAI key.
 > "OPENAI_API_KEY" = "your-key-here"
 
 Then, install the required libraries with:
-> pip install requirements.txt # TODO
+> pip install requirements.txt 
 
 ![Screenshot](assets/screenshot.png)
 
