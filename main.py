@@ -47,8 +47,8 @@ if __name__ == "__main__":
     text = gr.inputs.Textbox(lines=1, label="Message")
     textbox = gr.inputs.Textbox(lines=10, label="Message History")
 
-    iface = gr.Interface(fn=chatbot, inputs=text, outputs=textbox, title="Document Chat App", 
-                        description="Enter a message to chat with the chatbot. Full message history will be displayed below.")
+    iface = gr.Interface(fn=chatbot, inputs=text, outputs=textbox, title="Document Chat App",   # noqa: E501
+                        description="Enter a message to chat with the chatbot. Full message history will be displayed below.")  # noqa: E501
 
     # Run the interface
     iface.launch()
