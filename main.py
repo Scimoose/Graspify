@@ -27,11 +27,10 @@ def chatbot(your_input):
     chat_history.append("User: " + your_input)
     # Generate an answer to the user's input using the ChatVectorDBChain module
     response = qa({"question": your_input, "chat_history": message_history})
-    print(response["answer"])
     # Add response to message history
     chat_history.append("Chatbot: " + response["answer"])
     # Return response
-    return response["answer"] + "\n\n" + "\n".join(chat_history)
+    return [response["answer"], "\n".join(chat_history)]  # noqa: E501
 
 """
 Initialize message history and chat history. These must be separate, 
@@ -44,10 +43,11 @@ chat_history = []
 
 if __name__ == "__main__":
     # Define Gradio interface and its boxes
-    text = gr.inputs.Textbox(lines=1, label="Message")
-    textbox = gr.inputs.Textbox(lines=10, label="Message History")
+    text = gr.components.Textbox(lines=1, label="Message")
+    textbox = gr.components.Textbox(lines=1, label="Answer")
+    history = gr.components.Textbox(lines=10, label="Chat History")
 
-    iface = gr.Interface(fn=chatbot, inputs=text, outputs=textbox, title="Document Chat App",   # noqa: E501
+    iface = gr.Interface(fn=chatbot, inputs=text, outputs=[textbox, history], title="Graspify - Document Chat Assistant",   # noqa: E501
                         description="Enter a message to chat with the chatbot. Full message history will be displayed below.")  # noqa: E501
 
     # Run the interface
