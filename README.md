@@ -19,4 +19,4 @@ As of now it only handles .pdf files, but will handle .doc and .txt files soon.
 Then there is the main.py file. It uses gradio to abstract code and give a simple UI to the application. There you can flag conversations if you don't like those and if you find a bug you can attach the file that flagging generates. 
 In the gradio app you can chat with the LLM, it also provides message history. 
 
-Lastly, there is also a jupyter notebook (#TODO) that will help you see what documents you have in your database should you wish to do so.
+Lastly, there is a Jupyter Notebook that will help you interact with the database should you wish to do so.
