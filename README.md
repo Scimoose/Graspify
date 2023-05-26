@@ -7,6 +7,8 @@ To get started, create a .env file and insert your OpenAI key.
 Then, install the required libraries with:
 > pip install requirements.txt # TODO
 
+![Screenshot](assets/screenshot.png)
+
 # Usage
 There are 3 files you should use.
 
