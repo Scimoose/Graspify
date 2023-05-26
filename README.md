@@ -1,5 +1,5 @@
-# Chatbot Assistant
- a LLM chatbot with chromaDB for document storage and GPT-3.5 for document analysis
+# Graspify - Your Chatbot Assistant
+This is a LLM chatbot with chromaDB for document storage and GPT-3.5 for document analysis.
 
 To get started, create a .env file and insert your OpenAI key.
 > "OPENAI_API_KEY" = "your-key-here"
