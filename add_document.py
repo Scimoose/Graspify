@@ -3,7 +3,12 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.document_loaders import UnstructuredPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
+from dotenv import load_dotenv
 import os
+import sys
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Set the value of the OPENAI_API_KEY variable to the value of the environment variable "OPENAI_API_KEY"  # noqa: E501
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
@@ -41,4 +46,5 @@ def add_pdf(document):
     db = None
 
 if __name__ == "__main__":
-    add_pdf("file.pdf")
+    add_pdf(sys.argv[1])
+    print("Done")
