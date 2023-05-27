@@ -1,4 +1,4 @@
-# Graspify - Your Chatbot Assistant
+# Graspify - Your Chatbot Assistant for document Q&A
 This is a LLM chatbot with chromaDB for document storage and GPT-3.5 for document analysis.
 
 To get started, create a .env file and insert your OpenAI key.
