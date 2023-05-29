@@ -1,6 +1,8 @@
 # Import necessary modules and libraries
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.document_loaders import UnstructuredPDFLoader
+from langchain.document_loaders import UnstructuredWordDocumentLoader
+from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import Chroma
 from dotenv import load_dotenv
@@ -13,13 +15,14 @@ load_dotenv()
 # Set the value of the OPENAI_API_KEY variable to the value of the environment variable "OPENAI_API_KEY"  # noqa: E501
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
-def add_pdf(document):
+def add_document(document, doc_loader):
     """
-    This function loads a PDF document, splits it into smaller chunks, generates embeddings for the text chunks using the OpenAIEmbeddings module and stores them in a Chroma vector store. 
+     This function loads a document, splits it into smaller chunks, generates embeddings for the text chunks using the OpenAIEmbeddings module and stores them in a Chroma vector store. 
     The vector store is then persisted to disk.
     
     Args:
-    - document: a string representing the path to the PDF document to be loaded
+    - document: a string representing the path to the document to be loaded
+    - doc_loader: an instance of a document loader class (e.g. UnstructuredPDFLoader, UnstructuredWordDocumentLoader)
 
     Returns:
     - None
@@ -30,7 +33,7 @@ def add_pdf(document):
     persist_directory = 'db'
 
     # Load the text from a PDF file using the UnstructuredPDFLoader module
-    loader = UnstructuredPDFLoader(document)
+    loader = doc_loader(document)
     documents = loader.load()
 
     # Split the loaded text into smaller chunks using the CharacterTextSplitter module
@@ -46,5 +49,15 @@ def add_pdf(document):
     db = None
 
 if __name__ == "__main__":
-    add_pdf(sys.argv[1])
-    print("Done")
+    path = sys.argv[1]
+    loaders = {
+        ".pdf": UnstructuredPDFLoader,
+        ".docx": UnstructuredWordDocumentLoader,
+        ".md": UnstructuredMarkdownLoader
+    }
+    ext = os.path.splitext(path)[1]
+    if ext in loaders:
+        add_document(path, loaders[ext])
+        print(f"Done - added {ext} to the database")
+    else:
+        print("Please provide a .pdf, .docx, or .md file")
